@@ -1,15 +1,16 @@
-const sqlite3 = require("sqlite3").verbose();
+var sqlite3 = require("sqlite3").verbose();
+var md5 = require("md5");
 
-let db = new sqlite3.Database("./Test.db", err => {
+const DBSOURCE = "Test.db";
+
+let db = new sqlite3.Database(DBSOURCE, err => {
     if (err) {
-        console.log(err.message);
+        // Cannot open database
+        console.error(err.message);
+        throw err;
+    } else {
+        console.log("Connected to the SQlite database.");
     }
-    console.log("Connection successful!");
-
-    // db.close(err => {
-    //     if (err) {
-    //         console.log(err.message);
-    //     }
-    //     console.log("Disconnection successful!");
-    // });
 });
+
+module.exports = db;

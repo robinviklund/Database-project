@@ -1,0 +1,24 @@
+{
+  "name": "express-api",
+  "version": "1.0.0",
+  "description": "Express REST API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Me",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^4.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fraigo/node-express-rest-api-example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fraigo/node-express-rest-api-example/issues"
+  },
+  "homepage": "https://github.com/fraigo/node-express-rest-api-example#readme"
+}
