@@ -14,38 +14,11 @@ app.listen(HTTP_PORT, () => {
     console.log("Server running on port %PORT%".replace("%PORT%", HTTP_PORT));
 });
 
-app.get("/api/car_user_id", (req, res, next) => {
-    var sql = "select * from car_user_id";
-    var params = [];
-    db.all(sql, params, (err, rows) => {
-        if (err) {
-            res.status(400).json({ error: err.message });
-            return;
-        }
-        res.json({
-            message: "success",
-            data: rows
-        });
-    });
-});
+app.use(express.static("public"));
 
-app.get("/api/cars_id", (req, res, next) => {
-    var sql = "select * from cars_id";
-    var params = [];
-    db.all(sql, params, (err, rows) => {
-        if (err) {
-            res.status(400).json({ error: err.message });
-            return;
-        }
-        res.json({
-            message: "success",
-            data: rows
-        });
-    });
-});
-
-app.get("/api/cars_id", (req, res, next) => {
-    var sql = "select * from users_id";
+app.get("/usercars", (req, res, next) => {
+    var sql =
+        "SELECT users_id.name, cars_id.make, cars_id.model FROM users_id INNER JOIN car_user_id ON users_id.id = car_user_id.user_id INNER JOIN cars_id ON cars_id.id = car_user_id.car_id";
     var params = [];
     db.all(sql, params, (err, rows) => {
         if (err) {
