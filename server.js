@@ -32,6 +32,13 @@ app.get("/usercars", (req, res, next) => {
     });
 });
 
+app.post("/add_usercar", function(req, res) {
+    var user = req.body.UserName;
+    var car = req.body.CarName;
+
+    res.send(user + " " + car);
+});
+
 // Root path
 app.get("/", (req, res, next) => {
     res.json({ message: "Ok" });
