@@ -18,7 +18,7 @@ app.use(express.static("public"));
 
 app.get("/usercars", (req, res, next) => {
     var sql =
-        "SELECT users_id.name, cars_id.make, cars_id.model FROM users_id INNER JOIN car_user_id ON users_id.id = car_user_id.user_id INNER JOIN cars_id ON cars_id.id = car_user_id.car_id";
+        "SELECT users_id.name, cars_id.make FROM users_id INNER JOIN car_user_id ON users_id.id = car_user_id.user_id INNER JOIN cars_id ON cars_id.id = car_user_id.car_id";
     var params = [];
     db.all(sql, params, (err, rows) => {
         if (err) {
@@ -32,11 +32,38 @@ app.get("/usercars", (req, res, next) => {
     });
 });
 
-app.post("/add_usercar", function(req, res) {
+app.post("/add", function(req, res) {
+    console.log("Called");
     var user = req.body.UserName;
     var car = req.body.CarName;
-
-    res.send(user + " " + car);
+    var lastUserId;
+    var lastCarId;
+    db.run(`INSERT INTO users_id(name) VALUES(?)`, [user], function(err) {
+        if (err) {
+            return console.log(err.message);
+        }
+        console.log(`A row has been inserted with rowid ${this.lastID}`);
+        lastUserId = this.lastID;
+    }).run(`INSERT INTO cars_id(make) VALUES(?)`, [car], function(err) {
+        if (err) {
+            return console.log(err.message);
+        }
+        console.log(`A row has been inserted with rowid ${this.lastID}`);
+        lastCarId = this.lastID;
+        db.run(
+            `INSERT INTO car_user_id(car_id, user_id) VALUES(?,?)`,
+            [lastCarId, lastUserId],
+            function(err) {
+                if (err) {
+                    return console.log(err.message);
+                }
+                console.log(
+                    `A row has been inserted with rowid ${this.lastID}`
+                );
+            }
+        );
+    });
+    res.send("Data added successfully!");
 });
 
 // Root path
