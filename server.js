@@ -66,6 +66,42 @@ app.post("/add", function(req, res) {
     res.send("Data added successfully!");
 });
 
+app.post("/delete", function(req, res) {
+    console.log("Called");
+    /*
+    var user = req.body.UserName;
+    var car = req.body.CarName;
+    var lastUserId;
+    var lastCarId;
+    
+    db.run(`INSERT INTO users_id(name) VALUES(?)`, [user], function(err) {
+        if (err) {
+            return console.log(err.message);
+        }
+        console.log(`A row has been inserted with rowid ${this.lastID}`);
+        lastUserId = this.lastID;
+    }).run(`INSERT INTO cars_id(make) VALUES(?)`, [car], function(err) {
+        if (err) {
+            return console.log(err.message);
+        }
+        console.log(`A row has been inserted with rowid ${this.lastID}`);
+        lastCarId = this.lastID;
+        db.run(
+            `INSERT INTO car_user_id(car_id, user_id) VALUES(?,?)`,
+            [lastCarId, lastUserId],
+            function(err) {
+                if (err) {
+                    return console.log(err.message);
+                }
+                console.log(
+                    `A row has been inserted with rowid ${this.lastID}`
+                );
+            }
+        );
+    });*/
+    res.send("Data added successfully!");
+});
+
 // Root path
 app.get("/", (req, res, next) => {
     res.json({ message: "Ok" });

@@ -9,16 +9,19 @@ table {
     border-collapse: collapse;
 }
 
-table,
-tr,
-td {
+.td {
+    padding: 6px;
     border: 1px solid black;
 }
 
 tr,
 td {
-    padding: 5px 10px 5px 10px;
     text-align: left;
+}
+
+button {
+    margin-left: 5px;
+    padding: 0 3px 0 3px;
 }
 
 .box {

@@ -38,13 +38,21 @@
                     for (var i = 0; i < data.data.length; i++) {
                         console.log(data.data[i].name);
                         console.log(data.data[i].make);
+                        var trgtId = data.data[i].name;
                         tableStr += "<tr>";
-                        tableStr += "<td>" + data.data[i].name + "</td>";
-                        tableStr += "<td>" + data.data[i].make + "</td>";
+                        tableStr +=
+                            "<td class='td'>" + data.data[i].name + "</td>";
+                        tableStr +=
+                            "<td class='td'>" + data.data[i].make + "</td>";
+                        tableStr +=
+                            "<td><button class='delete'>DELETE</button></td>";
                         tableStr += "</td>";
                     }
                     document.getElementById("table").innerHTML = tableStr;
                 }
+            });
+            $(".delete").click(function() {
+                console.log("Delete");
             });
         </script>
     </body>
